@@ -1,13 +1,11 @@
 import java.sql.*;
 
-public class main {
+public static void main(String[] args) {
    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   static final String DB_URL = "jdbc:mysql://10.0.10.3:3306/pwcho2018-Nr-83783";
+   static final String DB_URL = "jdbc:mysql://10.0.10.3:3306/bazaDanychJava";
 
    static final String USER = "BLach";
    static final String PASS = "password";
-   
-   public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
    try{
@@ -18,7 +16,11 @@ public class main {
 
       stmt = conn.createStatement();
       String sql;
-      sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
+	   sql="CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );";
+      stmt.executeQuery(sql);
+	   sql="INSERT INTO Persons (PersonID, LastName, FirstName, Address, City) VALUES (1, 'Sureshkumar', 'Deepak', 'Jackal Creek','Johannesburg');";
+	   stmt.executeQuery(sql);
+	   sql = "SELECT PersonID, FirstName, LastName, Address, City FROM Persons";
       ResultSet rs = stmt.executeQuery(sql);
 
       while(rs.next()){
@@ -54,5 +56,4 @@ public class main {
          se.printStackTrace();
       }
    }
- }
 }
