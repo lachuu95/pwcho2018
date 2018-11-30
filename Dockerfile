@@ -1,4 +1,4 @@
-FROM java:latest
+FROM java:8
 LABEL maintainer="Łach Błażej"
 COPY . /
 MAKE /
