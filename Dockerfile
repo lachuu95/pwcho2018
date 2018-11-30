@@ -1,6 +1,5 @@
-FROM java:8
-LABEL maintainer="Łach Błażej"
+FROM java:8  
 COPY . /
-WORKDIR /
-RUN javac main.java
-CMD ["java", "-classpath", "mysql-connector-java-5.1.6.jar:.","main"]
+WORKDIR /  
+RUN javac DockerConnectMySQL.java
+CMD ["java", "-classpath", "mysql-connector-java-5.1.6.jar:.","DockerConnectMySQL"]
