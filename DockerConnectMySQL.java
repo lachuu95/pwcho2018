@@ -10,12 +10,15 @@ public class DockerConnectMySQL {
    public static void main(String[] args) {
    Connection conn = null;
    Statement stmt = null;
-   try{
-      Class.forName("com.mysql.jdbc.Driver");
-
-      System.out.println("Connecting to database...");
+	   do
+	   try{
+		   Class.forName("com.mysql.jdbc.Driver");
+		   System.out.println("Connecting to database...");
       conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
+	   }catch(SQLException se){
+      se.printStackTrace();}
+	   while(se==0)
+   try{
       stmt = conn.createStatement();
       String sql;
       sql = "CREATE TABLE Persons (PersonID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255) );";
