@@ -1,5 +1,6 @@
-FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install apache2 -y
-EXPOSE 8080
-CMD ["apache2ctl","-D","FOREGROUND"]
+FROM java:latest
+LABEL maintainer="Łach Błażej"
+COPY . /
+MAKE /
+RUN javac main.java
+CMD ["java", "-classpath", "mysql-connector-java-5.1.6.jar:.","main"]
