@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Scanner;
 import java.sql.*;
 
@@ -7,8 +6,6 @@ public class DockerConnectMySQL {
     static final String DB_URL = "jdbc:mysql://10.0.10.3:3306/bazaDanychJava";
     static final String USER = "BLach";
     static final String PASS = "password";
-    static final String ROOTPASS = "root";
-    static final String ROOTUSER = "root";
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -20,10 +17,11 @@ public class DockerConnectMySQL {
                     conn = DriverManager.getConnection(DB_URL, USER, PASS);
                     connect = true;
                 } catch (Exception e) {
-                    System.out.println("Connecting to database...");
+                    System.out.println("Łączenie z serwerem bazy danych");
                     Thread.sleep(1000);
                 }
             } while (!connect);
+			System.out.println("Połączono z serwerem bazy danych");
             stmt = conn.createStatement();
             String sql;
             sql = "DROP TABLE IF EXISTS Persons";
@@ -65,12 +63,13 @@ public class DockerConnectMySQL {
                         sql += insert.nextLine();
                         sql += "');";
                         stmt.executeUpdate(sql);
+						System.out.println("Dodano encje");
                         break;
                     }
                     case "2": {
                         sql = "SELECT PersonID, FirstName, LastName, City FROM Persons";
                         ResultSet rs = stmt.executeQuery(sql);
-                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "ID: ", "First Name: ", "Last Name: ", "City: ");
+                        System.out.printf("|%5s|%15s|%15s|%15s|\n", "ID: ", "Imię: ", "Nazwisko: ", "Miasto: ");
                         while (rs.next()) {
                             int id = rs.getInt("PersonID");
                             String first = rs.getString("FirstName");
@@ -86,6 +85,7 @@ public class DockerConnectMySQL {
                         break;
                     }
                     default: {
+						System.out.println("");
                         System.out.println("Wybierz odpowiednią opcje!");
                         break;
                     }
